@@ -10,12 +10,14 @@ const outputHours = document.querySelector('span[data-hours]');
 const outputMinutes = document.querySelector('span[data-minutes]');
 const outputSeconds = document.querySelector('span[data-seconds]');
 
+btn.disabled = true;
 btn.addEventListener('click', startTimer);
 
 let userSelectedDate = null;
 let timerId = null;
 
 function startTimer() {
+  btn.disabled = true;
   timerId = setInterval(updatedTimer, 1000);
 }
 
@@ -44,19 +46,16 @@ function updatedTimer() {
 }
 
 function convertMs(ms) {
-  // Number of milliseconds per unit of time
+
   const second = 1000;
   const minute = second * 60;
   const hour = minute * 60;
   const day = hour * 24;
 
-  // Remaining days
+ 
   const days = Math.floor(ms / day);
-  // Remaining hours
   const hours = Math.floor((ms % day) / hour);
-  // Remaining minutes
   const minutes = Math.floor(((ms % day) % hour) / minute);
-  // Remaining seconds
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
@@ -86,3 +85,5 @@ const options = {
 };
 
 flatpickr(input, options);
+
+
